@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "ff-dashboard.fullname" . }}-configuration
+  labels:
+    {{- include "ff-dashboard.labels" . | nindent 4 }}
+data:
+  {{- toYaml .Values.configuration | nindent 2 }}

@@ -1,0 +1,130 @@
+nameOverride: ""
+fullnameOverride: ""
+
+configuration: {}
+existingSecret: ""
+
+imagePullSecrets: []
+
+frontend:
+  replicaCount: 1
+  image:
+    repository: registry.minding.blog/ff-fechenheim/dashboard-frontend
+    pullPolicy: IfNotPresent
+    tag: "1.1.1"
+  service:
+    type: ClusterIP
+    port: 3000
+  startupProbe:
+    httpGet:
+      path: /
+      port: 3000
+    failureThreshold: 10
+    periodSeconds: 1
+  livenessProbe:
+    httpGet:
+      path: /
+      port: 3000
+    failureThreshold: 1
+    periodSeconds: 600
+  volumes: []
+  volumeMounts: []
+
+backend:
+  replicaCount: 1
+  image:
+    repository: registry.minding.blog/ff-fechenheim/dashboard-backend
+    pullPolicy: IfNotPresent
+    tag: "1.1.0"
+  service:
+    type: ClusterIP
+    port: 3000
+  startupProbe:
+    httpGet:
+      path: /internal/probe
+      port: 3000
+    failureThreshold: 10
+    periodSeconds: 1
+  livenessProbe:
+    httpGet:
+      path: /internal/probe
+      port: 3000
+    failureThreshold: 1
+    periodSeconds: 600
+  volumes: []
+  volumeMounts: []
+
+serviceAccount:
+  create: true
+  automount: false
+  annotations: {}
+  name: ""
+
+podAnnotations: {}
+podLabels: {}
+podSecurityContext: {}
+
+securityContext:
+  runAsNonRoot: true
+  runAsUser: 1000
+  runAsGroup: 1000
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: true
+  capabilities:
+    drop:
+      - "ALL"
+  seccompProfile:
+    type: RuntimeDefault
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+  tls: true
+  hosts:
+    - chart-example.local
+  paths:
+    - path: /
+      pathType: Prefix
+      backend:
+        serviceNameSuffix: "-frontend"
+        servicePort: 3000
+    - path: /api
+      pathType: Prefix
+      backend:
+        serviceNameSuffix: "-backend"
+        servicePort: 3000
+
+httpRoute:
+  enabled: false
+  annotations: {}
+  parentRefs:
+  - name: gateway
+    sectionName: http
+    # namespace: default
+  hostnames:
+  - chart-example.local
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /
+    - path:
+        type: PathPrefix
+        value: /api
+
+resources:
+  limits:
+    cpu: 2
+    ephemeral-storage: 512Mi
+    memory: 1Gi
+  requests:
+    cpu: 100m
+    ephemeral-storage: 64Mi
+    memory: 64Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

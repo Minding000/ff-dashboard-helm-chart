@@ -1,0 +1,11 @@
+FF dashboard is deployed!
+You should now be able to access it via:
+{{- if .Values.httpRoute.enabled }}
+{{- if .Values.httpRoute.hostnames }}
+{{- if and .Values.httpRoute.rules (first .Values.httpRoute.rules).matches (first (first .Values.httpRoute.rules).matches).path.value }}
+   - https://{{ .Values.httpRoute.hostnames | first }}{{ (first (first .Values.httpRoute.rules).matches).path.value }}
+{{- end }}
+{{- end }}
+{{- else if .Values.ingress.enabled }}
+  - http{{ if $.Values.ingress.tls }}s{{ end }}://{{ (first .Values.ingress.hosts).host }}{{ (first (first .Values.ingress.hosts).paths).path }}
+{{- end }}
