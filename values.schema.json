@@ -145,7 +145,234 @@
     },
     "configuration": {
       "additionalProperties": false,
-      "required": [],
+      "properties": {
+        "ui": {
+          "additionalProperties": false,
+          "properties": {
+            "log": {
+              "additionalProperties": false,
+              "properties": {
+                "level": {
+                  "type": "string",
+                  "enum": ["fatal", "error", "warn", "info", "debug", "trace", "silent"]
+                }
+              },
+              "required": [
+                "level"
+              ],
+              "type": "object"
+            },
+            "websiteTitle": {
+              "type": "string"
+            },
+            "headerText": {
+              "type": "string"
+            },
+            "postsHeading": {
+              "type": "string"
+            },
+            "waterLevelHeading": {
+              "type": "string"
+            },
+            "cloudMap": {
+              "additionalProperties": false,
+              "properties": {
+                "url": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "url"
+              ],
+              "type": "object"
+            },
+            "background": {
+              "additionalProperties": false,
+              "properties": {
+                "color": {
+                  "type": "string"
+                },
+                "image": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "url": {
+                      "type": "string"
+                    },
+                    "refreshInterval": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "url"
+                  ],
+                  "type": "object"
+                },
+                "video": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "url": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "url"
+                  ],
+                  "type": "object"
+                },
+                "deepZoomImage": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "timestampUrl": {
+                      "type": "string"
+                    },
+                    "tileUrl": {
+                      "type": "string"
+                    },
+                    "refreshInterval": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "timestampUrl",
+                    "tileUrl"
+                  ],
+                  "type": "object"
+                }
+              },
+              "required": [],
+              "type": "object"
+            }
+          },
+          "required": [
+            "headerText",
+            "cloudMap",
+            "background"
+          ],
+          "type": "object"
+        },
+        "measurements": {
+          "additionalProperties": false,
+          "properties": {
+            "coordinates": {
+              "additionalProperties": false,
+              "properties": {
+                "latitude": {
+                  "type": "number"
+                },
+                "longitude": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "latitude",
+                "longitude"
+              ],
+              "type": "object"
+            },
+            "pegelOnline": {
+              "additionalProperties": false,
+              "properties": {
+                "stations": {
+                  "items": {
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "name"
+                    ],
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              },
+              "required": [
+                "stations"
+              ],
+              "type": "object"
+            },
+            "bfs": {
+              "additionalProperties": false,
+              "properties": {
+                "kenn": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "kenn"
+              ],
+              "type": "object"
+            }
+          },
+          "required": [
+            "coordinates",
+            "pegelOnline",
+            "bfs"
+          ],
+          "type": "object"
+        },
+        "warnings": {
+          "additionalProperties": false,
+          "properties": {
+            "nina": {
+              "additionalProperties": false,
+              "properties": {
+                "ars": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "ars"
+              ],
+              "type": "object"
+            }
+          },
+          "required": [
+            "nina"
+          ],
+          "type": "object"
+        },
+        "posts": {
+          "additionalProperties": false,
+          "properties": {
+            "bluesky": {
+              "additionalProperties": false,
+              "properties": {
+                "handle": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "handle"
+              ],
+              "type": "object"
+            },
+            "twitter": {
+              "additionalProperties": false,
+              "properties": {
+                "userId": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "userId"
+              ],
+              "type": "object"
+            }
+          },
+          "required": [],
+          "type": "object"
+        }
+      },
+      "required": [
+        "ui",
+        "measurements"
+      ],
       "type": "object"
     },
     "existingSecret": {
