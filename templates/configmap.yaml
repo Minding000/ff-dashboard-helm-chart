@@ -6,4 +6,4 @@ metadata:
     {{- include "ff-dashboard.labels" . | nindent 4 }}
 data:
   configuration.yaml: |
-{{- toYaml .Values.configuration | indent 4 }}
+{{- toYaml .Values.configuration | nindent 4 }}
