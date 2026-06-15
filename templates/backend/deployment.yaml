@@ -17,6 +17,7 @@ spec:
       {{- end }}
       labels:
         {{- include "ff-dashboard.labels" . | nindent 8 }}
+        app.kubernetes.io/component: backend
         {{- with .Values.podLabels }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
@@ -60,10 +61,14 @@ spec:
           {{- end }}
           volumeMounts:
             - name: configuration
-              mountPath: "/app"
+              mountPath: "/app/configuration.yaml"
+              subPath: configuration.yaml
+              readOnly: true
           {{- with .Values.existingSecret }}
             - name: secret
-              mountPath: "/app"
+              mountPath: "/app/secrets.yaml"
+              subPath: secrets.yaml
+              readOnly: true
           {{- end }}
           {{- with .Values.backend.volumeMounts }}
             {{- toYaml . | nindent 12 }}

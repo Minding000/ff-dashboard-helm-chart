@@ -4,6 +4,7 @@ fullnameOverride: ""
 configuration: {}
 existingSecret: ""
 # Secret schema:
+# secrets.yaml: |
 #   cms:
 #     adminKeyHash: string (required)
 #     jwtKey: string (required)
