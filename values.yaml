@@ -24,7 +24,7 @@ frontend:
   image:
     repository: registry.minding.blog/ff-fechenheim/dashboard-frontend
     pullPolicy: IfNotPresent
-    tag: "1.1.1"
+    tag: "1.1.2"
   service:
     type: ClusterIP
     port: 3000
@@ -48,7 +48,7 @@ backend:
   image:
     repository: registry.minding.blog/ff-fechenheim/dashboard-backend
     pullPolicy: IfNotPresent
-    tag: "1.1.1"
+    tag: "1.1.2"
   service:
     type: ClusterIP
     port: 3000
