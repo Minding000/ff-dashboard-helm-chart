@@ -48,10 +48,11 @@ backend:
   image:
     repository: registry.minding.blog/ff-fechenheim/dashboard-backend
     pullPolicy: IfNotPresent
-    tag: "1.1.0"
+    tag: "1.1.1"
   service:
     type: ClusterIP
     port: 3000
+  env: []
   startupProbe:
     httpGet:
       path: /internal/probe
