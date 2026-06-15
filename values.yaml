@@ -3,6 +3,18 @@ fullnameOverride: ""
 
 configuration: {}
 existingSecret: ""
+# Secret schema:
+#   cms:
+#     adminKeyHash: string (required)
+#     jwtKey: string (required)
+#     databaseUri: string
+#   posts:
+#     bluesky:
+#       credentials:
+#         username: string
+#         password: string
+#     twitter:
+#       apiKey: string
 
 imagePullSecrets: []
 

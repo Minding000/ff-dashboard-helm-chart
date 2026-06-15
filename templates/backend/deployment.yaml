@@ -36,11 +36,11 @@ spec:
           securityContext:
             {{- toYaml . | nindent 12 }}
           {{- end }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          image: "{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: {{ .Values.service.port }}
+              containerPort: {{ .Values.backend.service.port }}
               protocol: TCP
           {{- with .Values.backend.startupProbe }}
           startupProbe:
@@ -65,7 +65,9 @@ spec:
             - name: secret
               mountPath: "/app"
           {{- end }}
-            {{- toYaml .Values.backend.volumeMounts | nindent 12 }}
+          {{- with .Values.backend.volumeMounts }}
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
       volumes:
         - name: configuration
           configMap:
@@ -75,7 +77,9 @@ spec:
           secret:
             secretName: {{ . }}
       {{- end }}
-        {{- toYaml .Values.backend.volumes | nindent 8 }}
+      {{- with .Values.backend.volumes }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
