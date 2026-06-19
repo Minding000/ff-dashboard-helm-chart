@@ -586,8 +586,9 @@
       "additionalProperties": false,
       "properties": {
         "annotations": {
-          "additionalProperties": false,
-          "required": [],
+          "additionalProperties": {
+            "type": "string"
+          },
           "type": "object"
         },
         "enabled": {
@@ -685,6 +686,9 @@
       "additionalProperties": false,
       "properties": {
         "annotations": {
+          "additionalProperties": {
+            "type": "string"
+          },
           "type": "object"
         },
         "className": {
@@ -761,13 +765,15 @@
       "type": "object"
     },
     "podAnnotations": {
-      "additionalProperties": false,
-      "required": [],
+      "additionalProperties": {
+        "type": "string"
+      },
       "type": "object"
     },
     "podLabels": {
-      "additionalProperties": false,
-      "required": [],
+      "additionalProperties": {
+        "type": "string"
+      },
       "type": "object"
     },
     "podSecurityContext": {
@@ -880,8 +886,9 @@
       "additionalProperties": false,
       "properties": {
         "annotations": {
-          "additionalProperties": false,
-          "required": [],
+          "additionalProperties": {
+            "type": "string"
+          },
           "type": "object"
         },
         "automount": {
